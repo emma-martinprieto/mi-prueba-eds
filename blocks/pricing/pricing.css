@@ -1,0 +1,259 @@
+/* PricingSection (Figma node 94:2885) */
+.pricing {
+  background: #FFFFFF;
+  padding: 64px 96px 48px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 48px;
+}
+
+.pricing .pricing-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  text-align: center;
+  max-width: 525px;
+}
+
+.pricing .pricing-eyebrow {
+  font-family: 'RM Neue', sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  letter-spacing: 1.04px;
+  text-transform: uppercase;
+  color: #3E31FA;
+  margin: 0;
+}
+
+.pricing .pricing-header h2 {
+  font-family: 'RM Neue', sans-serif;
+  font-weight: 700;
+  font-size: 56px;
+  line-height: 60.48px;
+  letter-spacing: -1.4px;
+  color: #0F2145;
+  margin: 0;
+}
+
+.pricing .pricing-header p {
+  font-family: 'RM Neue', sans-serif;
+  font-size: 16px;
+  line-height: 26.4px;
+  color: #43526E;
+  margin: 0;
+}
+
+/* Tabs selector (Platinum/Premium/Junior/Base) */
+.pricing .tier-selector {
+  display: flex;
+  background: #F3F5F8;
+  border-radius: 130px;
+  padding: 4px;
+}
+
+.pricing .tier-selector button {
+  border: none;
+  background: transparent;
+  height: 48px;
+  padding: 0 24px;
+  border-radius: 130px;
+  font-family: 'RM Neue', sans-serif;
+  font-size: 16px;
+  color: #5E6A83;
+  cursor: pointer;
+}
+
+.pricing .tier-selector button.is-active {
+  background: #3E31FA;
+  color: #FBFDFF;
+}
+
+/* Cards grid */
+.pricing .pricing-cards {
+  display: flex;
+  gap: 24px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.pricing .pricing-card {
+  position: relative;
+  width: 280px;
+  border: 2px solid transparent;
+  border-radius: 32px;
+  box-shadow: 0 8px 32px -8px rgba(84, 77, 182, 0.2);
+  overflow: hidden;
+  background: #FFFFFF;
+  display: flex;
+  flex-direction: column;
+}
+
+.pricing .pricing-card.is-highlighted {
+  border-color: #3E31FA;
+}
+
+.pricing .pricing-card .card-badge {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #DEE5FD;
+  color: #2115AB;
+  font-family: 'RM Neue', sans-serif;
+  font-size: 14px;
+  padding: 5px 8px;
+  border-radius: 8px;
+  white-space: nowrap;
+}
+
+.pricing .pricing-card .card-image {
+  height: 156px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pricing .pricing-card .card-image img {
+  max-height: 104px;
+  border-radius: 8px;
+  box-shadow: 0 12px 22px 0 rgba(20, 20, 43, 0.25);
+}
+
+.pricing .pricing-card .card-body {
+  padding: 20px 24px 0;
+  flex: 1;
+}
+
+.pricing .pricing-card .card-eyebrow {
+  font-family: 'RM Neue', sans-serif;
+  font-size: 13px;
+  color: #43526E;
+  margin: 0 0 4px;
+}
+
+.pricing .pricing-card .card-price {
+  display: flex;
+  align-items: flex-end;
+  gap: 4px;
+  margin-bottom: 4px;
+}
+
+.pricing .pricing-card .card-price .amount {
+  font-family: 'RM Neue', sans-serif;
+  font-weight: 700;
+  font-size: 38px;
+  color: #0F2145;
+}
+
+.pricing .pricing-card .card-price .period {
+  font-family: 'RM Neue', sans-serif;
+  font-size: 14px;
+  color: #43526E;
+}
+
+.pricing .pricing-card .card-subprice {
+  font-family: 'RM Neue', sans-serif;
+  font-size: 14px;
+  color: #8C95A6;
+  margin: 0 0 4px;
+}
+
+.pricing .pricing-card .card-title {
+  font-family: 'RM Neue', sans-serif;
+  font-weight: 700;
+  font-size: 21px;
+  color: #0F2145;
+  margin: 0 0 4px;
+}
+
+.pricing .pricing-card .card-desc {
+  font-family: 'RM Neue', sans-serif;
+  font-size: 14px;
+  line-height: 21.7px;
+  color: #43526E;
+  margin: 0 0 16px;
+}
+
+.pricing .pricing-card .card-features {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.pricing .pricing-card .card-features li {
+  display: flex;
+  gap: 9px;
+  align-items: flex-start;
+  font-family: 'RM Neue', sans-serif;
+  font-size: 14px;
+  color: #43526E;
+}
+
+.pricing .pricing-card .card-features li::before {
+  content: '✓';
+  flex-shrink: 0;
+  width: 16px;
+  color: #3E31FA;
+  font-weight: 700;
+}
+
+.pricing .pricing-card .card-footer {
+  padding: 16px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.pricing .pricing-card .card-see-all {
+  font-family: 'RM Neue', sans-serif;
+  font-weight: 600;
+  font-size: 13px;
+  color: #5E6A83;
+  text-decoration: none;
+}
+
+.pricing .pricing-card .card-cta {
+  width: 100%;
+  height: 51px;
+  border-radius: 12px;
+  border: none;
+  background-image: linear-gradient(0deg, #3E31FA 19.958%, #8760F6 93.04%);
+  color: #FFFFFF;
+  font-family: 'RM Neue', sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.pricing .compare-plans {
+  font-family: 'RM Neue', sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  color: #3E31FA;
+  text-decoration: underline;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+@media (width <= 1100px) {
+  .pricing {
+    padding: 48px 24px;
+  }
+
+  .pricing .pricing-header h2 {
+    font-size: 36px;
+    line-height: 40px;
+  }
+
+  .pricing .pricing-cards {
+    flex-direction: column;
+    align-items: center;
+  }
+}

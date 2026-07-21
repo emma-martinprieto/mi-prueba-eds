@@ -1,0 +1,82 @@
+/* Section - CTA FINAL (Figma node 94:2772) */
+.cta-final {
+  position: relative;
+  min-height: 617px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.cta-final picture,
+.cta-final img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+
+.cta-final::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(to bottom, #0A0A0A 35%, rgba(10, 10, 10, 0) 100%);
+}
+
+.cta-final .cta-content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  max-width: 560px;
+}
+
+.cta-final h2 {
+  font-family: 'RM Neue', sans-serif;
+  font-weight: 700;
+  font-size: 88px;
+  line-height: 88px;
+  letter-spacing: -3.08px;
+  color: #FFFFFF;
+  margin: 0 0 32px;
+}
+
+.cta-final p {
+  font-family: 'RM Neue', sans-serif;
+  font-size: 16px;
+  line-height: 27.2px;
+  color: rgba(255, 255, 255, 0.75);
+  margin: 0 0 40px;
+}
+
+.cta-final .button-container a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 63px;
+  padding: 0 40px;
+  border-radius: 16px;
+  background-image: linear-gradient(4deg, #3E31FA 15%, #8760F6 94%);
+  box-shadow: 0 12px 40px -12px rgba(84, 77, 183, 0.76);
+  color: #FFFFFF;
+  font-family: 'RM Neue', sans-serif;
+  font-weight: 600;
+  font-size: 18px;
+  text-decoration: none;
+}
+
+@media (width <= 700px) {
+  .cta-final h2 {
+    font-size: 48px;
+    line-height: 50px;
+  }
+
+  .cta-final .cta-content {
+    padding: 0 24px;
+  }
+}
