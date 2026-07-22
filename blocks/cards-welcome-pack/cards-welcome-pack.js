@@ -1,50 +1,81 @@
-/*
- * Cards Welcome Pack block - EDS
- * Contenido esperado:
- * Fila 1: Título de sección (ej. "Un Welcome Pack<br>a tu altura.")
- * Fila 2: Descripción de sección
- * Filas siguientes (una por card): Imagen | Título | Descripción (usa saltos de línea para las líneas) | Clara (poner "si" para fondo claro, dejar vacío para oscuro)
- */
 export default function decorate(block) {
   const rows = [...block.children];
-  const [titleRow, descRow, ...cardRows] = rows;
 
-  const header = document.createElement('div');
-  header.className = 'section-header';
+  // Estructura según tu tabla de AEM:
+  // Fila 0: Título principal
+  // Fila 1: Subtítulo/Descripción
+  // Filas 2, 3, 4: Packs (Badge | Título Pack | Descripción Pack)
+  // Fila 5: Imagen destacada
+  const titleRow = rows[0];
+  const descRow = rows[1];
+  const packRows = rows.slice(2, -1);
+  const imgRow = rows[rows.length - 1];
+
+  // Contenedor Columna Izquierda (Información)
+  const infoCol = document.createElement('div');
+  infoCol.className = 'welcome-pack-info';
+
+  // Cabecera
   const h2 = document.createElement('h2');
-  h2.innerHTML = titleRow?.innerHTML || '';
-  const p = document.createElement('p');
-  p.textContent = descRow?.textContent.trim() || '';
-  header.append(h2, p);
+  h2.className = 'welcome-pack-title';
+  h2.innerHTML = titleRow?.children[0]?.innerHTML.trim() || '';
 
-  const ul = document.createElement('ul');
+  const pDesc = document.createElement('p');
+  pDesc.className = 'welcome-pack-subtitle';
+  pDesc.textContent = descRow?.children[0]?.textContent.trim() || '';
 
-  cardRows.forEach((row) => {
+  infoCol.append(h2, pDesc);
+
+  // Lista de Packs
+  const packsList = document.createElement('ul');
+  packsList.className = 'welcome-pack-list';
+
+  packRows.forEach((row) => {
     const cells = [...row.children];
-    const [imgCell, titleCell, textCell, lightCell] = cells;
-    const img = imgCell?.querySelector('img');
-    const isLight = lightCell?.textContent.trim().toLowerCase() === 'si';
+    if (cells.length < 3) return;
+
+    const badgeText = cells[0]?.textContent.trim() || '';
+    const packTitle = cells[1]?.textContent.trim() || '';
+    const packDesc = cells[2]?.textContent.trim() || '';
 
     const li = document.createElement('li');
-    if (isLight) li.classList.add('is-light');
+    li.className = 'pack-item';
 
-    const textWrap = document.createElement('div');
-    textWrap.className = 'card-text';
+    const headerDiv = document.createElement('div');
+    headerDiv.className = 'pack-header';
+
+    const badgeSpan = document.createElement('span');
+    badgeSpan.className = `pack-badge ${badgeText.toLowerCase() === 'opcional' ? 'is-optional' : 'is-included'}`;
+    badgeSpan.textContent = badgeText;
+
     const h3 = document.createElement('h3');
-    h3.textContent = titleCell?.textContent.trim() || '';
-    const desc = document.createElement('p');
-    desc.textContent = textCell?.textContent.trim() || '';
-    textWrap.append(h3, desc);
+    h3.className = 'pack-name';
+    h3.textContent = packTitle;
 
-    li.append(textWrap);
-    if (img) {
-      img.className = 'card-img';
-      li.append(img);
-    }
-    ul.append(li);
+    headerDiv.append(badgeSpan, h3);
+
+    const descP = document.createElement('p');
+    descP.className = 'pack-desc';
+    descP.textContent = packDesc;
+
+    li.append(headerDiv, descP);
+    packsList.append(li);
   });
 
+  infoCol.append(packsList);
+
+// Contenedor Columna Derecha (Imagen)
+  const imgCol = document.createElement('div');
+  imgCol.className = 'welcome-pack-media';
+  
+  // Extraemos el picture o img directamente
+  const pictureOrImg = imgRow?.querySelector('picture') || imgRow?.querySelector('img');
+  if (pictureOrImg) {
+    imgCol.append(pictureOrImg);
+  }
+
+  // Limpiar y estructurar bloque final
   block.innerHTML = '';
   block.classList.add('cards-welcome-pack');
-  block.append(header, ul);
+  block.append(infoCol, imgCol);
 }
