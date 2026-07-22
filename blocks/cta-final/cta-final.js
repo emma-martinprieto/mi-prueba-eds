@@ -1,39 +1,62 @@
 /*
- * CTA Final block - EDS
- * Contenido esperado:
- * Fila 1: Imagen de fondo
- * Fila 2: Título (ej. "Únete<br>a la Leyenda")
- * Fila 3: Descripción
- * Fila 4: Botón (texto + enlace)
+ * CTA Final Block - EDS
  */
 export default function decorate(block) {
   const rows = [...block.children];
-  const [imgRow, titleRow, descRow, ctaRow] = rows;
 
-  const picture = imgRow?.querySelector('picture');
-  const cta = ctaRow?.querySelector('a');
+  // Extraemos exactamente cada fila de la tabla de da.live
+  const [bgRow, titleRow, descRow, btnRow] = rows;
 
+  // 1. Imagen de fondo
+  const bgPicture = bgRow?.querySelector('picture') || bgRow?.querySelector('img');
+
+  // 2. Título (mantiene los saltos de línea de la celda)
+  const titleText = titleRow?.innerHTML?.trim() || 'Únete a la Leyenda';
+
+  // 3. Subtítulo / Descripción
+  const descText = descRow?.textContent?.trim() || '';
+
+  // 4. Botón
+  const btnAnchor = btnRow?.querySelector('a');
+  const btnText = btnAnchor ? btnAnchor.textContent.trim() : (btnRow?.textContent?.trim() || 'Hazte Madridista');
+  const btnLink = btnAnchor ? btnAnchor.href : '#';
+
+  // --- Construimos la estructura HTML limpia ---
+  const container = document.createElement('div');
+  container.className = 'cta-final-content';
+
+  const heading = document.createElement('h2');
+  heading.className = 'cta-final-title';
+  heading.innerHTML = titleText; // Permite <br> si en el documento metes salto de línea
+
+  const desc = document.createElement('p');
+  desc.className = 'cta-final-description';
+  desc.textContent = descText;
+
+  const button = document.createElement('a');
+  button.className = 'cta-final-btn';
+  button.href = btnLink;
+  button.textContent = btnText;
+
+  container.append(heading, desc, button);
+
+  // Limpiamos la tabla original y montamos el componente
   block.innerHTML = '';
-  block.classList.add('cta-final');
-  if (picture) block.append(picture);
-
-  const content = document.createElement('div');
-  content.className = 'cta-content';
-
-  const h2 = document.createElement('h2');
-  h2.innerHTML = titleRow?.innerHTML || '';
-
-  const p = document.createElement('p');
-  p.textContent = descRow?.textContent.trim() || '';
-
-  content.append(h2, p);
-
-  if (cta) {
-    const btnWrap = document.createElement('p');
-    btnWrap.className = 'button-container';
-    btnWrap.append(cta);
-    content.append(btnWrap);
+  if (bgPicture) {
+    bgPicture.className = 'cta-final-bg';
+    block.append(bgPicture);
   }
+  block.append(container);
 
-  block.append(content);
+  // Animación Entrada Escalonada (whileInView)
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        container.classList.add('is-visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.2 });
+
+  observer.observe(block);
 }

@@ -1,82 +1,156 @@
-/* Section - CTA FINAL (Figma node 94:2772) */
-.cta-final {
-  position: relative;
-  min-height: 617px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
+/* blocks/cta-final/cta-final.css */
+
+.cta-final-wrapper {
+  padding: 0;
+  margin: 0;
+  width: 100%;
 }
 
-.cta-final picture,
-.cta-final img {
+.cta-final {
+  position: relative;
+  width: 100%;
+  min-height: 520px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  background-color: #0A0A0A;
+  color: #ffffff;
+  font-family: 'RM Neue', sans-serif;
+  text-align: center;
+  padding: 80px 20px;
+  box-sizing: border-box;
+}
+
+/* Imagen de fondo con oscurecimiento para legibilidad */
+.cta-final .cta-final-bg {
   position: absolute;
-  inset: 0;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  z-index: 0;
-}
-
-.cta-final::after {
-  content: '';
-  position: absolute;
-  inset: 0;
   z-index: 1;
-  background: linear-gradient(to bottom, #0A0A0A 35%, rgba(10, 10, 10, 0) 100%);
+  opacity: 0.4;
 }
 
-.cta-final .cta-content {
+.cta-final .cta-final-bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Contenedor central vertical */
+.cta-final-content {
   position: relative;
   z-index: 2;
+  max-width: 650px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  text-align: center;
-  max-width: 560px;
+  gap: 20px;
 }
 
-.cta-final h2 {
-  font-family: 'RM Neue', sans-serif;
+/* --- ESTILOS DE TEXTO --- */
+
+.cta-final-title {
+  color: #FFFFFF;
+  font-size: 52px;
   font-weight: 700;
-  font-size: 88px;
-  line-height: 88px;
-  letter-spacing: -3.08px;
-  color: #FFFFFF;
-  margin: 0 0 32px;
+  line-height: 1.1;
+  margin: 0;
+  word-wrap: break-word;
 }
 
-.cta-final p {
-  font-family: 'RM Neue', sans-serif;
+.cta-final-title p {
+  margin: 0;
+  padding: 0;
+}
+
+@media (min-width: 900px) {
+  .cta-final-title {
+    font-size: 80px;
+    line-height: 84px;
+  }
+}
+
+.cta-final-description {
+  color: #FFFFFF;
+  opacity: 0.85;
   font-size: 16px;
-  line-height: 27.2px;
-  color: rgba(255, 255, 255, 0.75);
-  margin: 0 0 40px;
+  font-weight: 400;
+  line-height: 1.6;
+  margin: 0;
+  max-width: 500px;
 }
 
-.cta-final .button-container a {
+/* Botón degradado de Figma */
+.cta-final-btn {
   display: inline-flex;
-  align-items: center;
   justify-content: center;
-  height: 63px;
-  padding: 0 40px;
+  align-items: center;
+  padding: 18px 44px;
   border-radius: 16px;
-  background-image: linear-gradient(4deg, #3E31FA 15%, #8760F6 94%);
-  box-shadow: 0 12px 40px -12px rgba(84, 77, 183, 0.76);
-  color: #FFFFFF;
-  font-family: 'RM Neue', sans-serif;
-  font-weight: 600;
+  background: linear-gradient(1deg, var(--color-blue-59, #3E31FA) 15%, var(--color-violet-67, #8760F6) 94%);
+  box-shadow: 0px 12px 40px -12px rgba(84, 77, 183, 0.76);
+  color: #FFFFFF !important;
   font-size: 18px;
+  font-weight: 600;
   text-decoration: none;
+  margin-top: 10px;
+  cursor: pointer;
+  /* Transición suave para hover y click */
+  transition: transform 0.15s ease, box-shadow 0.2s ease, opacity 0.6s ease;
 }
 
-@media (width <= 700px) {
-  .cta-final h2 {
-    font-size: 48px;
-    line-height: 50px;
-  }
+.cta-final-btn:hover {
+  box-shadow: 0px 16px 44px -10px rgba(84, 77, 183, 0.95);
+}
 
-  .cta-final .cta-content {
-    padding: 0 24px;
-  }
+/* 💥 Animación en Figma: Botón al presionar - CSS active: scale(0.97) */
+.cta-final-btn:active {
+  transform: scale(0.97) !important;
+}
+
+/* --- ANIMACIONES DE ENTRADA ESCALONADA (whileInView) --- */
+
+/* Estado inicial (Ocultos y desplazados hacia abajo) */
+.cta-final-title,
+.cta-final-description,
+.cta-final-btn {
+  opacity: 0;
+  will-change: transform, opacity;
+  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), 
+              transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.cta-final-title {
+  transform: translateY(22px); /* Título: y 22px */
+}
+
+.cta-final-description {
+  transform: translateY(16px); /* Subtítulo: y 16px */
+}
+
+.cta-final-btn {
+  transform: translateY(16px); /* Botón: y 16px */
+}
+
+/* Estado animado cuando entra en pantalla (is-visible) con sus Delays exactos de Figma */
+.cta-final-content.is-visible .cta-final-title {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0s; /* delay 0s */
+}
+
+.cta-final-content.is-visible .cta-final-description {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.15s; /* delay 0.15s */
+}
+
+.cta-final-content.is-visible .cta-final-btn {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.3s; /* delay 0.3s */
 }

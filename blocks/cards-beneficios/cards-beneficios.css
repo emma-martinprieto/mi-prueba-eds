@@ -1,7 +1,9 @@
-/* Beneficios_Section (Figma node 94:2781) */
+/* Beneficios_Section (Figma node 94:2781) — carrusel horizontal */
 .cards-beneficios {
+  position: relative;
   background-color: #0A0A0A;
   padding: 96px;
+  overflow: hidden;
 }
 
 .cards-beneficios .section-header {
@@ -9,6 +11,14 @@
   justify-content: space-between;
   gap: 142px;
   margin-bottom: 48px;
+  opacity: 0;
+  transform: translateY(48px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.cards-beneficios .section-header.is-visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .cards-beneficios .section-header h2 {
@@ -22,47 +32,86 @@
   max-width: 580px;
 }
 
-.cards-beneficios .section-header h2 .light {
-  color: rgba(243, 245, 248, 0.7);
-  display: block;
+.cards-beneficios .section-header h2 p {
+  margin: 0;
 }
 
-.cards-beneficios .section-header p {
+.cards-beneficios .section-header h2 p:last-child {
+  color: rgba(243, 245, 248, 0.7);
+}
+
+.cards-beneficios .section-header p.section-desc {
   font-family: 'RM Neue', sans-serif;
   font-size: 18px;
   line-height: 26.4px;
   color: #F3F5F8;
   max-width: 456px;
   align-self: center;
+  margin: 0;
 }
 
-.cards-beneficios ul {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
+/* Carrusel */
+.cards-beneficios .carousel-wrap {
+  position: relative;
+}
+
+.cards-beneficios ul.cards-list {
+  display: flex;
   gap: 32px;
   list-style: none;
   margin: 0;
   padding: 0;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  cursor: grab;
 }
 
-.cards-beneficios li {
+.cards-beneficios ul.cards-list::-webkit-scrollbar {
+  display: none;
+}
+
+.cards-beneficios ul.cards-list.is-dragging {
+  cursor: grabbing;
+  scroll-snap-type: none;
+}
+
+.cards-beneficios li.card-item {
   position: relative;
+  flex: 0 0 380px;
   height: 500px;
   border-radius: 28px;
   overflow: hidden;
   box-shadow: inset 0 2px 2.9px 1px rgba(255, 255, 255, 0.04);
+  scroll-snap-align: start;
+  opacity: 0;
+  transform: translateY(32px) scale(0.97);
+  transition: opacity 0.5s ease-out, transform 0.5s ease-out;
 }
 
-.cards-beneficios li img {
+.cards-beneficios li.card-item.is-visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.cards-beneficios li.card-item picture,
+.cards-beneficios li.card-item img {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
   z-index: 0;
+  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+  pointer-events: none;
+  user-select: none;
 }
 
-.cards-beneficios li::after {
+.cards-beneficios li.card-item:hover img {
+  transform: scale(1.06);
+}
+
+.cards-beneficios li.card-item::after {
   content: '';
   position: absolute;
   inset: 0;
@@ -99,7 +148,7 @@
   color: rgba(255, 255, 255, 0.75);
 }
 
-.cards-beneficios .card-content h3 {
+.cards-beneficios .card-title {
   font-family: 'RM Neue', sans-serif;
   font-weight: 700;
   font-size: 26px;
@@ -109,12 +158,53 @@
   margin: 0;
 }
 
-.cards-beneficios .card-content p {
+.cards-beneficios .card-text {
   font-family: 'RM Neue', sans-serif;
   font-size: 14px;
   line-height: 20.8px;
   color: rgba(255, 255, 255, 0.62);
   margin: 0;
+}
+
+/* Flecha de navegación */
+.cards-beneficios .carousel-nav {
+  position: absolute;
+  top: 234px;
+  right: 24px;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(10, 10, 10, 0.45);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 3;
+  transition: background 0.2s ease, border-color 0.2s ease, opacity 0.2s ease;
+}
+
+.cards-beneficios .carousel-nav svg {
+  width: 20px;
+  height: 20px;
+}
+
+.cards-beneficios .carousel-nav:hover {
+  background: rgba(10, 10, 10, 0.7);
+  border-color: rgba(255, 255, 255, 0.35);
+}
+
+.cards-beneficios .carousel-nav.prev {
+  right: auto;
+  left: 24px;
+}
+
+.cards-beneficios .carousel-nav[disabled] {
+  opacity: 0;
+  pointer-events: none;
 }
 
 @media (width <= 1100px) {
@@ -127,13 +217,12 @@
     gap: 24px;
   }
 
-  .cards-beneficios ul {
-    grid-template-columns: repeat(2, 1fr);
+  .cards-beneficios li.card-item {
+    flex-basis: 300px;
+    height: 420px;
   }
-}
 
-@media (width <= 600px) {
-  .cards-beneficios ul {
-    grid-template-columns: 1fr;
+  .cards-beneficios .carousel-nav {
+    display: none;
   }
 }

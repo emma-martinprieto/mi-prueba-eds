@@ -1,18 +1,48 @@
-.header {
+/*
+ * Header Block Styles
+ */
+
+.header-wrapper {
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  background: rgba(10, 10, 10, 0.4); /* Capa semitransparente para dar contraste */
+  backdrop-filter: blur(8px);
+}
+
+.header .nav-wrapper {
+  max-width: 1440px;
+  height: 72px;
+  margin: 0 auto;
+  padding: 0 32px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px;
-  background: #000;
+  box-sizing: border-box;
 }
 
-.nav-brand {
-  color: white;
-  font-size: 30px;
-  font-weight: bold;
+/* Branding */
+.header .nav-brand img {
+  height: 40px;
+  width: auto;
+  object-fit: contain;
+  display: block;
 }
 
-.nav-lang {
-  color: white;
-  font-size: 20px;
+/* Selector de idioma */
+.header .nav-lang-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #EDEBFA;
+  font-family: 'RM Neue', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  cursor: pointer;
+}
+
+.header .nav-lang-btn svg path {
+  stroke: #EDEBFA;
 }

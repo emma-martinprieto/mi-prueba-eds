@@ -137,13 +137,17 @@ header {
   height: auto;
 }
 
-header .header,
+/* Ocultar el footer global para que no añada espacio al final */
+footer,
 footer .footer {
+  display: none !important;
+}
+
+header .header {
   visibility: hidden;
 }
 
-header .header[data-block-status="loaded"],
-footer .footer[data-block-status="loaded"] {
+header .header[data-block-status="loaded"] {
   visibility: visible;
 }
 
