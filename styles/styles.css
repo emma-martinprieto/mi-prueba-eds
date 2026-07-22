@@ -49,6 +49,18 @@
   --color-off-white: #FBFDFF;
   --color-off-white-alt: #FAFCFF;
 
+  /* ---- Modales / Cards Madridistas ---- */
+  --color-azure-23: #1C2F58;
+  --color-azure-16: #0F2145;
+  --color-azure-card-bg-30: rgba(28, 47, 88, 0.80);
+  --color-azure-card-bg-16: rgba(15, 33, 69, 0.80);
+  
+  --color-card-text-primary: #FAFCFF;
+  --color-card-text-secondary: rgba(255, 255, 255, 0.62);
+  --color-card-badge-text: rgba(255, 255, 255, 0.75);
+  --color-card-badge-bg: rgba(238, 242, 253, 0.14);
+  --color-card-badge-border: rgba(255, 255, 255, 0.12);
+
   --color-heading-dark: #0F2145;
   --color-body-grey: #43526E;
   --color-muted-grey: #5E6A83;

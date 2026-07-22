@@ -1,20 +1,26 @@
-/* HeroSection (Figma node 94:2742) */
+/* ==========================================================================
+   Hero Block Styles (Fluido & Responsivo para Figma 1440px -> 390px)
+   ========================================================================== */
+
 .hero {
   position: relative;
   aspect-ratio: 1440 / 684;
-  min-height: 400px;
+  min-height: 584px;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
+  /* Espaciado superior fluido: va desde 133px en 390px hasta 222px en 1440px */
+  padding-top: clamp(133px, 8.47vw + 100px, 222px);
+  box-sizing: border-box;
   background-color: #0A0A0A;
   overflow: hidden;
 }
 
+/* Animaciones de entrada */
 @keyframes heroFadeUp {
   from {
     opacity: 0;
     transform: translateY(28px);
   }
-
   to {
     opacity: 1;
     transform: translateY(0);
@@ -26,22 +32,12 @@
   animation: heroFadeUp 0.7s ease-out forwards;
 }
 
-.hero h1 {
-  animation-delay: 0.15s;
-}
+.hero h1 { animation-delay: 0.15s; }
+.hero > .hero-content > p { animation-delay: 0.3s; }
+.hero .button-container { animation-delay: 0.45s; }
+.hero .hero-stats { animation-delay: 0.58s; }
 
-.hero > .hero-content > p {
-  animation-delay: 0.3s;
-}
-
-.hero .button-container {
-  animation-delay: 0.45s;
-}
-
-.hero .hero-stats {
-  animation-delay: 0.58s;
-}
-
+/* Capas de Imagen y Overlays */
 .hero picture,
 .hero img {
   position: absolute;
@@ -58,45 +54,72 @@
   inset: 0;
   z-index: 1;
   background-image:
-    linear-gradient(0deg, rgba(10, 10, 10, 0.2) 0%, rgba(10, 10, 10, 0.12) 45%, rgba(10, 10, 10, 0.024) 100%),
-    linear-gradient(90deg, rgba(10, 10, 10, 0.4) 0%, rgba(10, 10, 10, 0) 55%);
+    linear-gradient(0deg, rgba(10, 10, 10, 0.58) 0%, rgba(10, 10, 10, 0.24) 45%, rgba(10, 10, 10, 0.07) 100%),
+    linear-gradient(90deg, rgba(15, 33, 69, 0.4) 0%, rgba(15, 33, 69, 0) 55%);
 }
 
+/* Contenedor Principal del Contenido */
 .hero .hero-content {
   position: relative;
   z-index: 2;
+  width: 100%;
   max-width: 600px;
-  margin-left: 96px;
+  /* Margen izquierdo fluido: va desde 34px en 390px hasta 96px en 1440px */
+  margin-left: clamp(34px, 5.9vw + 11px, 96px);
+  margin-right: 24px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   gap: 32px;
 }
 
+/* --- TÍTULO H1 FLUIDO --- */
 .hero h1 {
   font-family: 'RM Neue', sans-serif;
   font-weight: 700;
-  font-size: 72px;
-  line-height: 72px;
-  letter-spacing: 0;
+  /* Tamaño de fuente fluido: escala progresivamente entre 50.7px y 72px */
+  font-size: clamp(50.7px, 2.03vw + 42.8px, 72px);
+  line-height: clamp(50px, 2.1vw + 41.8px, 72px);
+  letter-spacing: -0.02em;
   color: #FFFFFF;
   margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
 }
 
-.hero h1 p {
+/* Reseteo interno de márgenes e interlineado para mantener cajas exactas */
+.hero h1 > *,
+.hero h1 p,
+.hero h1 span,
+.hero h1 strong {
+  margin: 0 !important;
+  padding: 0 !important;
+  line-height: inherit !important;
+}
+
+/* Segunda línea: opacidad al 70% */
+.hero h1 > *:nth-child(2),
+.hero h1 span:last-child,
+.hero h1 p:last-child,
+.hero h1 strong:last-child {
+  color: rgba(255, 255, 255, 0.70);
+  font-weight: 700;
+}
+
+/* --- DESCRIPCIÓN FLUIDA --- */
+.hero .hero-content > p {
+  max-width: 500px;
+  font-family: 'RM Neue', sans-serif;
+  font-size: clamp(16px, 0.19vw + 15.2px, 18px);
+  line-height: clamp(22px, 0.57vw + 19.8px, 28px);
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.65);
   margin: 0;
 }
 
-.hero h1 p:last-child {
-  color: rgba(255, 255, 255, 0.7);
-}
-
-.hero p {
-  max-width: 500px;
-  font-family: 'RM Neue', sans-serif;
-  font-size: 18px;
-  line-height: 28px;
-  color: rgba(255, 255, 255, 0.65);
+/* --- BOTÓN CTA --- */
+.hero .button-container {
   margin: 0;
 }
 
@@ -105,22 +128,33 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  height: 56px;
+  height: clamp(48px, 0.76vw + 45px, 56px);
   padding: 12px 24px;
   border-radius: 12px;
-  background-image: linear-gradient(2.021287672616097deg, #3E31FA 19.1%, #8760F6 94.27%);
+  background: linear-gradient(8deg, #3E31FA 15%, #8760F6 100%);
   color: #FBFDFF;
   font-family: 'RM Neue', sans-serif;
   font-weight: 600;
-  font-size: 18px;
+  font-size: clamp(16px, 0.19vw + 15.2px, 18px);
+  line-height: 24px;
   text-decoration: none;
+  box-sizing: border-box;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
+.hero .button-container a:hover,
+.hero .button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(62, 49, 250, 0.35);
+}
+
+/* --- ESTADÍSTICAS --- */
 .hero .hero-stats {
   display: flex;
   align-items: center;
-  gap: 24px;
+  gap: clamp(12px, 1.14vw + 7.5px, 24px);
   height: 39px;
+  margin-top: 8px;
 }
 
 .hero .hero-stats .stat {
@@ -133,14 +167,19 @@
 .hero .hero-stats .stat strong {
   font-family: 'RM Neue', sans-serif;
   font-weight: 700;
-  font-size: 24px;
+  font-size: clamp(20px, 0.38vw + 18.5px, 24px);
   color: #FFFFFF;
 }
 
 .hero .hero-stats .stat span {
   font-family: 'RM Neue', sans-serif;
-  font-size: 18px;
-  color: rgba(255, 255, 255, 0.45);
+  font-size: clamp(14px, 0.38vw + 12.5px, 18px);
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.48);
+}
+
+.hero .hero-stats .stat:last-child span {
+  font-weight: 600;
 }
 
 .hero .hero-stats .divider {
@@ -149,25 +188,88 @@
   background: rgba(255, 255, 255, 0.25);
 }
 
-@media (width <= 900px) {
+@media (max-width: 768px) {
+  /* 1. Marco del Hero a 390x584 */
   .hero {
-    aspect-ratio: auto;
-    min-height: 560px;
+    width: 100% !important;
+    max-width: 390px !important;
+    height: 584px !important;
+    min-height: 584px !important;
+    max-height: 584px !important;
+    margin: 0 auto !important;
+    position: relative !important;
+    overflow: hidden !important;
+    box-sizing: border-box !important;
   }
 
+  /* 2. Imagen de fondo */
+  .hero picture,
+  .hero img {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    object-position: center top !important;
+    z-index: 0 !important;
+  }
+
+  /* 3. Contenedor Flexbox vertical */
   .hero .hero-content {
-    margin-left: 24px;
-    margin-right: 24px;
-    max-width: none;
+    position: relative !important;
+    z-index: 2 !important;
+    height: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: flex-start !important;
+    align-items: flex-start !important;
+    padding: 100px 24px 24px 24px !important; /* Espacio superior para la barra/logo */
+    box-sizing: border-box !important;
   }
 
-  .hero h1 {
-    font-size: 44px;
-    line-height: 46px;
+  /* 4. Textos en flujo relativo (sin absolute) */
+  .hero h1,
+  .hero .hero-content h1 {
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    font-size: 42px !important;
+    line-height: 44px !important;
+    margin: 0 0 12px 0 !important;
   }
 
+  .hero .hero-content > p {
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    font-size: 15px !important;
+    line-height: 20px !important;
+    color: rgba(255, 255, 255, 0.7) !important;
+    margin: 0 0 20px 0 !important; /* Margen inferior para SEPARAR del botón */
+    max-width: 280px !important;
+  }
+
+  /* 5. Botón justo debajo del párrafo */
+  .hero .button-container,
+  .hero .button {
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    margin-top: 8px !important;
+    width: 235px !important;
+    height: 48px !important;
+    z-index: 2 !important;
+  }
+
+  /* 6. Estadísticas fijadas en el fondo */
   .hero .hero-stats {
-    flex-wrap: wrap;
-    height: auto;
+    position: relative !important;
+    top: auto !important;
+    margin-top: auto !important; /* Empuja las métricas al final de los 584px */
+    width: 100% !important;
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
   }
 }

@@ -1,48 +1,100 @@
-/*
- * Header Block Styles
- */
-
-.header-wrapper {
+/* Contenedor principal que envuelve el Header */
+header.header-wrapper {
   width: 100%;
   position: absolute;
   top: 0;
   left: 0;
   z-index: 100;
-  background: rgba(10, 10, 10, 0.4); /* Capa semitransparente para dar contraste */
-  backdrop-filter: blur(8px);
+  background: transparent;
 }
 
-.header .nav-wrapper {
+/* Barra del nav interior */
+.header.block .nav-wrapper {
   max-width: 1440px;
   height: 72px;
   margin: 0 auto;
-  padding: 0 32px;
+  padding-left: 32px;
+  padding-right: 32px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   box-sizing: border-box;
 }
 
-/* Branding */
-.header .nav-brand img {
+/* --- LOGO (Izquierda) --- */
+.header.block .nav-brand {
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.header.block .nav-brand a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  max-width: 160px;
+  overflow: hidden;
+  text-decoration: none;
+}
+
+.header.block .nav-brand img {
   height: 40px;
   width: auto;
+  max-width: 160px;
   object-fit: contain;
   display: block;
 }
 
-/* Selector de idioma */
-.header .nav-lang-btn {
+/* --- HERRAMIENTAS (Derecha) --- */
+.header.block .nav-tools {
+  position: relative;
   display: flex;
+  justify-content: flex-start;
   align-items: center;
-  gap: 6px;
+  gap: 4px;
+}
+
+/* Botón Selector de Idioma (ES) */
+.header.block .nav-lang-btn {
+  height: 44px;
+  padding-left: 8px;
+  padding-right: 8px;
+  border-radius: 8px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+}
+
+.header.block .nav-lang-btn span {
   color: #EDEBFA;
   font-family: 'RM Neue', sans-serif;
   font-size: 16px;
   font-weight: 400;
-  cursor: pointer;
+  word-wrap: break-word;
 }
 
-.header .nav-lang-btn svg path {
+/* Icono Flecha SVG del idioma */
+.header.block .nav-lang-btn svg {
+  width: 12px;
+  height: 7px;
+  overflow: hidden;
+}
+
+.header.block .nav-lang-btn svg path {
   stroke: #EDEBFA;
+  stroke-width: 2px;
+}
+
+/* --- Adaptación Móvil / Resp. --- */
+@media (max-width: 768px) {
+  .header.block .nav-wrapper {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
 }

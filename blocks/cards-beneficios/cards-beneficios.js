@@ -20,7 +20,26 @@ export default function decorate(block) {
 
   if (titleRow) {
     const h2 = document.createElement('h2');
-    h2.innerHTML = titleRow.innerHTML || '';
+    
+    // Extraemos todos los párrafos (<p>) si EDS generó una lista de ellos
+    const paragraphs = [...titleRow.querySelectorAll('p')].map(p => p.innerHTML.trim()).filter(Boolean);
+
+    if (paragraphs.length >= 2) {
+      // Caso A: EDS separó el título en múltiples <p> en el documento
+      const firstLine = paragraphs[0];
+      const secondLine = paragraphs.slice(1).join(' ');
+      h2.innerHTML = `<span>${firstLine}</span><br><span class="text-muted">${secondLine}</span>`;
+    } else {
+      // Caso B: EDS entregó el HTML con <br> o texto plano
+      const rawHTML = titleRow.innerHTML.replace(/<\/?p>/g, '').trim();
+      if (rawHTML.includes('<br>')) {
+        const parts = rawHTML.split(/<br\s*\/?>/i);
+        h2.innerHTML = `<span>${parts[0].trim()}</span><br><span class="text-muted">${parts.slice(1).join(' ').trim()}</span>`;
+      } else {
+        h2.innerHTML = rawHTML;
+      }
+    }
+    
     header.append(h2);
   }
 
@@ -34,7 +53,7 @@ export default function decorate(block) {
   const ul = document.createElement('ul');
   ul.className = 'cards-list';
 
-  cardRows.forEach((row) => {
+  cardRows.forEach((row, index) => {
     const cells = [...row.children];
     const [imgCell, badgeCell, titleCell, textCell] = cells;
     const picture = imgCell?.querySelector('picture');
@@ -42,6 +61,19 @@ export default function decorate(block) {
 
     const li = document.createElement('li');
     li.className = 'card-item';
+
+    // Detección de clases para tarjetas especiales
+    const badgeText = badgeCell?.textContent.trim().toUpperCase() || '';
+    const titleText = titleCell?.textContent.trim() || '';
+
+    if (badgeText === 'CONTENIDO' || titleText.includes('RM Play')) {
+      li.classList.add('card-translucent');
+    } else if (titleText.includes('Fundación') || titleText.includes('pasión comienza')) {
+      li.classList.add('card-diagonal');
+    } else if (titleText.includes('Más cerca de tus ídolos') || titleText.includes('premios firmados')) {
+      li.classList.add('card-idolos');
+    }
+
     li.append(picture);
 
     const content = document.createElement('div');
@@ -57,7 +89,8 @@ export default function decorate(block) {
     if (titleCell?.textContent.trim()) {
       const cardTitle = document.createElement('h3');
       cardTitle.className = 'card-title';
-      cardTitle.textContent = titleCell.textContent.trim();
+      // Mantenemos los <br> si vienen del documento de EDS
+      cardTitle.innerHTML = titleCell.innerHTML.trim();
       content.append(cardTitle);
     }
 
