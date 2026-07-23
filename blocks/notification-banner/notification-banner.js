@@ -1,28 +1,31 @@
 export default function decorate(block) {
-  // 1. Extraer los elementos (texto y botón)
+  // 1. Asignar clases estructurales al texto y botón
   const rows = [...block.children];
-  const textRow = rows[0]?.firstElementChild;
-  const buttonRow = rows[1]?.firstElementChild;
+  if (rows[0]?.firstElementChild) rows[0].firstElementChild.classList.add('notification-banner-text');
+  if (rows[1]?.firstElementChild) rows[1].firstElementChild.classList.add('notification-banner-button');
 
-  if (textRow) textRow.classList.add('notification-banner-text');
-  if (buttonRow) buttonRow.classList.add('notification-banner-button');
-
-  // 2. Lógica de visibilidad en Scroll (Sticky CTA)
-  const handleScroll = () => {
-    const hero = document.querySelector('.hero-wrapper') || document.querySelector('.hero');
-    const finalCta = document.querySelector('.pricing-wrapper') || document.body; // Ajustar según el selector del CTA final
-
-    const scrollY = window.scrollY || window.pageYOffset;
+  // 2. Control dinámico de visibilidad en Scroll
+  const checkScroll = () => {
+    const scrollPosition = window.scrollY || document.documentElement.scrollTop || 0;
     const windowHeight = window.innerHeight;
 
-    // Calcular límites de aparición y ocultación
-    const heroBottom = hero ? hero.offsetTop + hero.offsetHeight : 300;
-    const finalCtaTop = finalCta ? finalCta.offsetTop : document.body.scrollHeight;
+    // A) Entrada: justo al pasar la primera sección (Hero)
+    const firstSection = document.querySelector('.section');
+    const triggerOffset = firstSection ? (firstSection.offsetTop + firstSection.offsetHeight) : 200;
+    const isAfterHero = scrollPosition > triggerOffset;
 
-    const isAfterHero = scrollY > heroBottom;
-    const isBeforeFinalCta = (scrollY + windowHeight) < (finalCtaTop + 80);
+    // B) Salida: al acercarse al CTA final / última sección
+    const sections = document.querySelectorAll('.section');
+    const lastSection = sections.length > 1 ? sections[sections.length - 1] : null;
+    
+    let isBeforeFinalCta = true;
+    if (lastSection) {
+      const finalCtaTop = lastSection.offsetTop;
+      // Se oculta si el final de la ventana sobrepasa el top del CTA final + 80px
+      isBeforeFinalCta = (scrollPosition + windowHeight) < (finalCtaTop + 80);
+    }
 
-    // Activar o desactivar visibilidad
+    // 3. Aplicar estado final
     if (isAfterHero && isBeforeFinalCta) {
       block.classList.add('is-visible');
     } else {
@@ -30,5 +33,10 @@ export default function decorate(block) {
     }
   };
 
-  window.addEventListener('scroll', handleScroll, { passive: true });
+  // Escuchar eventos de scroll
+  window.addEventListener('scroll', checkScroll, { passive: true });
+  document.addEventListener('scroll', checkScroll, { passive: true });
+  
+  // Ejecutar verificación inicial
+  checkScroll();
 }

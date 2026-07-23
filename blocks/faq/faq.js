@@ -55,8 +55,18 @@ export default function decorate(block) {
     p.innerHTML = aCell?.innerHTML || '';
     answer.append(p);
 
+    // CONTROL DINÁMICO DE ALTURA
     btn.addEventListener('click', () => {
-      item.classList.toggle('is-open');
+      const isOpen = item.classList.contains('is-open');
+
+      if (isOpen) {
+        item.classList.remove('is-open');
+        answer.style.maxHeight = null; // Cierra la respuesta
+      } else {
+        item.classList.add('is-open');
+        // Asigna la altura real exacta del contenido interno
+        answer.style.maxHeight = `${answer.scrollHeight}px`;
+      }
     });
 
     item.append(btn, answer);

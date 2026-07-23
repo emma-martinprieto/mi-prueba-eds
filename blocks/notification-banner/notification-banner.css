@@ -1,92 +1,121 @@
 /* ==========================================================================
-   NOTIFICATION BANNER (Sticky CTA)
+   NOTIFICATION BANNER (Sticky CTA) - Exact Figma Dimensions
    ========================================================================== */
 
+/* 1. Liberar contenedor en EDS */
+.notification-banner-container,
 .notification-banner-wrapper {
+  max-width: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  width: 100% !important;
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
   z-index: 1000;
-  pointer-events: none; /* Evita bloquear interacción si está oculto */
+  pointer-events: none;
 }
 
+/* 2. Banner principal (Contenedor azul) */
 .notification-banner {
   background: var(--color-primary, #3E31FA);
   min-height: 72px;
-  width: 100%;
+  height: 72px;
+  width: 100vw;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 16px;
-  padding: 16px 24px;
+  padding: 16px 16px 16px 24px; /* top: 16px, right: 16px, bottom: 16px, left: 24px */
   box-sizing: border-box;
 
-  /* Estado oculto inicial (Slide + Fade) */
+  /* Animación */
   opacity: 0;
   transform: translateY(-100%);
   transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
               opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Estado visible al hacer scroll */
 .notification-banner.is-visible {
   opacity: 1;
   transform: translateY(0);
   pointer-events: auto;
 }
 
-/* Texto */
+/* 3. Texto del Banner */
 .notification-banner .notification-banner-text {
+  max-width: 276px;
   color: #FFFFFF;
   font-family: 'RM Neue', sans-serif;
   font-weight: 700;
   font-size: 18px;
   line-height: 24px;
   margin: 0;
+  word-wrap: break-word;
 }
 
-/* Botón (Outline / Secondary) */
+/* 4. Botón Secundario (Hazte Madridista) */
 .notification-banner .notification-banner-button a,
 .notification-banner .notification-banner-button button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  width: 185px;
   height: 48px;
   padding: 12px 20px;
+  gap: 10px;
   border-radius: 12px;
-  border: 2px solid #EDEBFA;
+  /* Outline de 2px de tipo #EDEBFA hacia adentro */
+  border: none;
+  outline: 2px solid #EDEBFA;
+  outline-offset: -2px;
   background: transparent;
   color: #FFFFFF;
   font-family: 'RM Neue', sans-serif;
   font-weight: 700;
   font-size: 16px;
   line-height: 20px;
+  text-align: center;
   text-decoration: none;
   box-sizing: border-box;
-  transition: background-color 0.2s ease, color 0.2s ease;
+  transition: background-color 0.2s ease;
 }
 
 .notification-banner .notification-banner-button a:hover {
-  background-color: rgba(255, 255, 255, 0.15);
+  background-color: rgba(255, 255, 255, 0.12);
 }
 
-/* Adaptación Mobile */
+/* 5. Ajuste responsive para pantallas pequeñas */
+/* ==========================================================================
+   ADAPTACIÓN MOBILE / PANTALLAS PEQUEÑAS (Especificación Figma 390px)
+   ========================================================================== */
+
 @media (max-width: 768px) {
+  /* Contenedor del Banner */
   .notification-banner {
-    min-height: 60px;
-    padding: 10px 16px;
-    gap: 12px;
+    height: 72px;
+    min-height: 72px;
+    padding: 16px 16px 16px 24px;
+    gap: 18px;
+    justify-content: center;
   }
 
+  /* Texto */
   .notification-banner .notification-banner-text {
+    width: 183px;
+    max-width: 183px;
     font-size: 14px;
-    line-height: 18px;
+    line-height: 24px;
   }
 
-  .notification-banner .notification-banner-button a {
-    height: 40px;
-    padding: 8px 14px;
-    font-size: 14px;
+  /* Botón Secundario */
+  .notification-banner .notification-banner-button a,
+  .notification-banner .notification-banner-button button {
+    width: 143px;
+    height: 48px;
+    padding: 12px;
+    gap: 10px;
+    font-size: 12px;
+    line-height: 20px;
   }
 }

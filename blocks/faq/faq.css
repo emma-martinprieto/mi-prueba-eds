@@ -1,45 +1,68 @@
-/* FAQSection (Figma node 94:3112) */
-.faq {
+/* ==========================================================================
+   FAQ SECTION - PADDING Y MÁRGENES PIXEL PERFECT (Figma Specification)
+   ========================================================================== */
+
+/* 1. Contenedor Principal (Padding top: 110px, laterales: 160px) */
+.faq,
+.faq-wrapper {
   background: #FFFFFF;
-  padding: 110px 160px 96px;
+  padding: 110px 160px 96px !important; /* 110px top, 160px left/right */
+  box-sizing: border-box;
+  max-width: none !important;
 }
 
-.faq .faq-header {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 12.8px;
-  text-align: center;
-  margin: 0 auto 48px;
-  max-width: 520px;
+/* 2. Header (Cota 1120x123px) */
+.faq .faq-header,
+.faq > div:first-child {
+  width: 100% !important;
+  max-width: 1120px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  gap: 12.8px !important;
+  text-align: center !important;
+  margin: 0 auto 34px auto !important; /* 34px de separación con la lista */
 }
 
-.faq .faq-eyebrow {
-  font-family: 'RM Neue', sans-serif;
-  font-weight: 700;
-  font-size: 16px;
-  letter-spacing: 1.04px;
-  text-transform: uppercase;
-  color: #3E31FA;
-  margin: 0;
+/* Eyebrow */
+.faq .faq-eyebrow,
+.faq .faq-header > *:first-child {
+  color: var(--color-primary, #3E31FA) !important;
+  font-family: 'RM Neue', sans-serif !important;
+  font-weight: 700 !important;
+  font-size: 16px !important;
+  line-height: 18px !important;
+  letter-spacing: 1.04px !important;
+  text-transform: uppercase !important;
+  margin: 0 !important;
 }
 
-.faq .faq-header h2 {
-  font-family: 'RM Neue', sans-serif;
-  font-weight: 700;
-  font-size: 56px;
-  color: #0F2145;
-  margin: 0;
+/* Título H2 */
+.faq .faq-header h2,
+.faq h2 {
+  color: #0F2145 !important;
+  font-family: 'RM Neue', sans-serif !important;
+  font-weight: 700 !important;
+  font-size: 56px !important;
+  line-height: 56px !important;
+  margin: 0 !important;
 }
 
+/* Subtítulo Párrafo (Solo en el header) */
 .faq .faq-header p {
-  font-family: 'RM Neue', sans-serif;
-  font-size: 16px;
-  color: #636682;
-  margin: 0;
+  width: 100% !important;
+  max-width: 520px !important;
+  color: #636682 !important;
+  font-family: 'RM Neue', sans-serif !important;
+  font-weight: 400 !important;
+  font-size: 16px !important;
+  line-height: 20px !important;
+  margin: 0 auto !important;
 }
 
+/* 3. Lista FAQ (Ancho 800px) */
 .faq .faq-list {
+  width: 100%;
   max-width: 800px;
   margin: 0 auto;
 }
@@ -91,29 +114,21 @@
   line-height: 24px;
   color: #43526E;
   margin: 0 0 20px;
+  max-width: none !important; /* Corregido para no heredar el limitante del header */
 }
 
 .faq .faq-row.is-open .faq-answer {
   max-height: 400px;
 }
 
+/* 4. Footer inferior ("¿No encuentras lo que buscas?") */
 .faq .faq-footer {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 16px;
   text-align: center;
-  margin-top: 48px;
-}
-
-.faq-footer {
-  text-align: center;
-  margin-top: 40px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 16px;
-  color: #6c757d; /* Color gris del texto pequeño */
+  margin-top: 32px;
 }
 
 .faq .faq-footer p {
@@ -121,10 +136,13 @@
   font-size: 16px;
   color: #788398;
   margin: 0;
+  max-width: none !important; /* Libera la restricción de 520px */
 }
 
 .faq .faq-footer a {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   border: 2px solid #3E31FA;
   border-radius: 12px;
   padding: 14px 28px;
@@ -133,14 +151,31 @@
   font-size: 16px;
   color: #3E31FA;
   text-decoration: none;
+  transition: background-color 0.2s ease;
 }
 
-@media (width <= 900px) {
-  .faq {
-    padding: 64px 24px;
+.faq .faq-footer a:hover {
+  background-color: rgba(62, 49, 250, 0.05);
+}
+
+/* 5. Responsive */
+@media (max-width: 1024px) {
+  .faq,
+  .faq-wrapper {
+    padding: 60px 24px !important;
   }
 
-  .faq .faq-header h2 {
-    font-size: 36px;
+  .faq .faq-header h2,
+  .faq h2 {
+    font-size: 40px !important;
+    line-height: 44px !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .faq .faq-header h2,
+  .faq h2 {
+    font-size: 32px !important;
+    line-height: 36px !important;
   }
 }

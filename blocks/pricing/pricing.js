@@ -65,7 +65,7 @@ export default function decorate(block) {
 
     const eyebrowText = document.createElement('p');
     eyebrowText.className = 'card-eyebrow';
-    eyebrowText.textContent = amount && amount.toLowerCase() !== 'gratis' ? 'Menos de' : '';
+    eyebrowText.innerHTML = amount && amount.toLowerCase() !== 'gratis' ? 'Menos de' : '&nbsp;';
 
     const priceWrap = document.createElement('div');
     priceWrap.className = 'card-price';
@@ -83,19 +83,12 @@ export default function decorate(block) {
     cardDesc.className = 'card-desc';
     cardDesc.textContent = descCell?.textContent.trim() || '';
 
-    const rawHtml = featuresCell?.innerHTML || '';
-    const cleanCell = document.createElement('div');
-    cleanCell.innerHTML = rawHtml.replace(/<br\s*\/?>/gi, '|'); // Cambiamos los <br> por |
-
-    const featureParagraphs = [...cleanCell.querySelectorAll('p, li')]
-      .flatMap((el) => el.textContent.split('|')) // Separamos si había <br>
-      .map((f) => f.trim())
+    const featureParagraphs = [...(featuresCell?.querySelectorAll('p') || [])]
+      .map((p) => p.textContent.trim())
       .filter(Boolean);
-
-    const allFeatures = featureParagraphs.length > 0
+    const allFeatures = featureParagraphs.length > 1
       ? featureParagraphs
       : (featuresCell?.textContent || '').split('|').map((f) => f.trim()).filter(Boolean);
-
     const shortFeatures = allFeatures.slice(0, 4);
     const extraFeatures = allFeatures.slice(4);
 
@@ -214,6 +207,7 @@ export default function decorate(block) {
 
   // En el carrusel móvil, resalta la pestaña de la card que está centrada al hacer scroll manual
   const observer = new IntersectionObserver((entries) => {
+    if (!window.matchMedia('(width <= 1100px)').matches) return;
     entries.forEach((entry) => {
       if (entry.isIntersecting && entry.intersectionRatio > 0.6) {
         const idx = entry.target.dataset.tierIndex;

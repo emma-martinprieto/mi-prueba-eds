@@ -12,25 +12,21 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  text-align: center;
   gap: 16px;
+  text-align: center;
   max-width: 525px;
-  margin: 0 auto;
 }
 
-/* Eyebrow: "ELIGE TU MEMBRESÍA" */
 .pricing .pricing-eyebrow {
   font-family: 'RM Neue', sans-serif;
   font-weight: 700;
   font-size: 16px;
-  line-height: 24px;
   letter-spacing: 1.04px;
   text-transform: uppercase;
   color: #3E31FA;
   margin: 0;
 }
 
-/* Título principal: "Planes para cada Madridista" */
 .pricing .pricing-header h2 {
   font-family: 'RM Neue', sans-serif;
   font-weight: 700;
@@ -41,10 +37,8 @@
   margin: 0;
 }
 
-/* Descripción: "Beneficios reales desde el primer día..." */
 .pricing .pricing-header p {
   font-family: 'RM Neue', sans-serif;
-  font-weight: 400;
   font-size: 16px;
   line-height: 26.4px;
   color: #43526E;
@@ -80,9 +74,11 @@
 /* Cards grid */
 .pricing .pricing-cards {
   display: flex;
+  align-items: stretch;
   gap: 24px;
   justify-content: center;
   flex-wrap: wrap;
+  margin-top: 20px;
 }
 
 .pricing .pricing-card {
@@ -91,11 +87,17 @@
   border: 2px solid transparent;
   border-radius: 32px;
   box-shadow: 0 8px 32px -8px rgba(84, 77, 182, 0.2);
-  overflow: hidden;
   background: #FFFFFF;
   display: flex;
   flex-direction: column;
   scroll-snap-align: start;
+}
+
+.pricing .pricing-card .card-body {
+  padding: 20px 24px 0;
+  flex: 1 0 auto;
+  display: flex;
+  flex-direction: column;
 }
 
 .pricing .pricing-card.is-highlighted {
@@ -104,9 +106,9 @@
 
 .pricing .pricing-card .card-badge {
   position: absolute;
-  top: -12px;
+  top: 0;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translate(-50%, -50%);
   background: #DEE5FD;
   color: #2115AB;
   font-family: 'RM Neue', sans-serif;
@@ -130,11 +132,6 @@
   box-shadow: 0 12px 22px 0 rgba(20, 20, 43, 0.25);
 }
 
-.pricing .pricing-card .card-body {
-  padding: 20px 24px 0;
-  flex: 1;
-}
-
 .pricing .pricing-card .card-eyebrow {
   font-family: 'RM Neue', sans-serif;
   font-size: 13px;
@@ -144,7 +141,7 @@
 
 .pricing .pricing-card .card-price {
   display: flex;
-  align-items: flex-end;
+  align-items: baseline;
   gap: 4px;
   margin-bottom: 4px;
 }
@@ -206,10 +203,8 @@
 
 .pricing .pricing-card .card-features li::before {
   content: '✓';
-  left: 0;
-  top: 6px;
-  width: 9px;
-  height: 5px;
+  flex-shrink: 0;
+  width: 16px;
   color: #22C55E;
   font-weight: 700;
 }
