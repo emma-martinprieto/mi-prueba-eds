@@ -12,21 +12,25 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 16px;
   text-align: center;
+  gap: 16px;
   max-width: 525px;
+  margin: 0 auto;
 }
 
+/* Eyebrow: "ELIGE TU MEMBRESÍA" */
 .pricing .pricing-eyebrow {
   font-family: 'RM Neue', sans-serif;
   font-weight: 700;
   font-size: 16px;
+  line-height: 24px;
   letter-spacing: 1.04px;
   text-transform: uppercase;
   color: #3E31FA;
   margin: 0;
 }
 
+/* Título principal: "Planes para cada Madridista" */
 .pricing .pricing-header h2 {
   font-family: 'RM Neue', sans-serif;
   font-weight: 700;
@@ -37,15 +41,17 @@
   margin: 0;
 }
 
+/* Descripción: "Beneficios reales desde el primer día..." */
 .pricing .pricing-header p {
   font-family: 'RM Neue', sans-serif;
+  font-weight: 400;
   font-size: 16px;
   line-height: 26.4px;
   color: #43526E;
   margin: 0;
 }
 
-/* Tabs selector (Platinum/Premium/Junior/Base) */
+/* Selector de tier (Platinum/Premium/Junior/Base) */
 .pricing .tier-selector {
   display: flex;
   background: #F3F5F8;
@@ -63,10 +69,11 @@
   font-size: 16px;
   color: #5E6A83;
   cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
 }
 
 .pricing .tier-selector button.is-active {
-  background: #3E31FA;
+  background-image: linear-gradient(0deg, #3E31FA 19.958%, #8760F6 93.04%);
   color: #FBFDFF;
 }
 
@@ -88,6 +95,7 @@
   background: #FFFFFF;
   display: flex;
   flex-direction: column;
+  scroll-snap-align: start;
 }
 
 .pricing .pricing-card.is-highlighted {
@@ -106,6 +114,7 @@
   padding: 5px 8px;
   border-radius: 8px;
   white-space: nowrap;
+  z-index: 2;
 }
 
 .pricing .pricing-card .card-image {
@@ -158,6 +167,7 @@
   font-size: 14px;
   color: #8C95A6;
   margin: 0 0 4px;
+  min-height: 17px;
 }
 
 .pricing .pricing-card .card-title {
@@ -196,29 +206,71 @@
 
 .pricing .pricing-card .card-features li::before {
   content: '✓';
-  flex-shrink: 0;
-  width: 16px;
-  color: #3E31FA;
+  left: 0;
+  top: 6px;
+  width: 9px;
+  height: 5px;
+  color: #22C55E;
   font-weight: 700;
 }
 
-.pricing .pricing-card .card-footer {
-  padding: 16px 24px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
+/* Desplegable "Ver todos los beneficios" — animación de altura con grid-template-rows,
+   sin necesidad de medir el alto por JS */
+.pricing .features-extra-wrap {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.3s ease-out;
 }
 
-.pricing .pricing-card .card-see-all {
+.pricing .features-extra-wrap.is-open {
+  grid-template-rows: 1fr;
+}
+
+.pricing .features-extra-inner {
+  overflow: hidden;
+}
+
+.pricing .features-extra-inner .card-features {
+  padding-top: 12px;
+}
+
+.pricing .toggle-benefits {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  width: 100%;
+  margin-top: 16px;
+  padding: 4px 0;
+  border: none;
+  background: none;
   font-family: 'RM Neue', sans-serif;
   font-weight: 600;
   font-size: 13px;
   color: #5E6A83;
-  text-decoration: none;
+  cursor: pointer;
 }
 
-.pricing .pricing-card .card-cta {
+.pricing .toggle-benefits svg {
+  width: 12px;
+  height: 12px;
+  transition: transform 0.2s ease;
+}
+
+.pricing .toggle-benefits.is-open svg {
+  transform: rotate(180deg);
+}
+
+.pricing .card-footer {
+  padding: 16px 24px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  margin-top: auto;
+}
+
+.pricing .card-cta {
   width: 100%;
   height: 51px;
   border-radius: 12px;
@@ -242,9 +294,41 @@
   cursor: pointer;
 }
 
+/* Navegación (solo visible en el modo carrusel de tablet/móvil) */
+.pricing .pricing-nav {
+  display: none;
+  position: absolute;
+  top: 50%;
+  right: 8px;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid rgba(15, 33, 69, 0.1);
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 4px 16px rgba(15, 33, 69, 0.15);
+  color: #0F2145;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 3;
+}
+
+.pricing .pricing-nav svg {
+  width: 18px;
+  height: 18px;
+}
+
 @media (width <= 1100px) {
   .pricing {
-    padding: 48px 24px;
+    padding: 48px 0;
+  }
+
+  .pricing .pricing-header,
+  .pricing .tier-selector,
+  .pricing .compare-plans {
+    margin-left: 24px;
+    margin-right: 24px;
   }
 
   .pricing .pricing-header h2 {
@@ -252,8 +336,31 @@
     line-height: 40px;
   }
 
+  /* Carrusel de una tarjeta a la vez, sincronizado con las pestañas */
+  .pricing .pricing-cards-wrap {
+    position: relative;
+    width: 100%;
+  }
+
   .pricing .pricing-cards {
-    flex-direction: column;
-    align-items: center;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    padding: 0 24px;
+  }
+
+  .pricing .pricing-cards::-webkit-scrollbar {
+    display: none;
+  }
+
+  .pricing .pricing-card {
+    flex: 0 0 calc(100% - 48px);
+    max-width: 340px;
+  }
+
+  .pricing .pricing-nav {
+    display: flex;
   }
 }
