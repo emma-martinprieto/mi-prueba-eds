@@ -1,24 +1,24 @@
-/* Estilos globales del bloque */
+/* Plan Comparator — modal/sección "Planes a tu medida" */
 .plan-comparator-container {
   max-width: 1248px;
   margin: 0 auto;
-  padding: 0 16px;
-  font-family: "RM Neue", -apple-system, BlinkMacSystemFont, sans-serif;
+  padding: 32px 96px 96px;
+  font-family: 'RM Neue', sans-serif;
   color: #0F2145;
-  background-color: #ffffff;
+  background-color: #FFFFFF;
 }
 
-/* Encabezado Principal */
 .plan-comparator-header {
-  margin-bottom: 32px;
+  margin-bottom: 24px;
 }
 
 .plan-comparator-title {
-  font-size: 32px;
+  font-size: 56px;
   font-weight: 700;
-  line-height: 40px;
+  line-height: 60.48px;
+  letter-spacing: -1.4px;
   color: #0F2145;
-  margin: 0 0 8px 0;
+  margin: 0 0 8px;
 }
 
 .plan-comparator-subtitle {
@@ -28,9 +28,22 @@
   margin: 0;
 }
 
-/* Tabla Principal */
+.plan-comparator-table-outer {
+  position: relative;
+}
+
+.plan-comparator-table-wrap {
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.plan-comparator-table-wrap::-webkit-scrollbar {
+  display: none;
+}
+
 .plan-comparator-table {
   width: 100%;
+  min-width: 640px;
   border-collapse: collapse;
   table-layout: fixed;
 }
@@ -45,16 +58,26 @@
   vertical-align: middle;
 }
 
-.plan-comparator-table td:first-child {
+/* Columna de etiquetas (nombres de fila) fija a la izquierda al hacer scroll */
+.plan-comparator-table .row-label-col {
+  position: sticky;
+  left: 0;
+  z-index: 1;
+  background-color: #FFFFFF;
   text-align: left;
   font-weight: 400;
-  width: 30%;
+  width: 220px;
 }
 
 .plan-comparator-table th {
   font-weight: 700;
   vertical-align: top;
   padding-bottom: 24px;
+}
+
+.plan-comparator-table th strong {
+  display: block;
+  font-size: 15px;
 }
 
 .plan-comparator-table th small {
@@ -65,9 +88,12 @@
   margin-top: 4px;
 }
 
-/* Fila de Acordeón / Categoría */
+/* Fila de acordeón / categoría */
 .plan-comparator-category-row td {
-  background-color: #ffffff;
+  position: sticky;
+  left: 0;
+  z-index: 1;
+  background-color: #FFFFFF;
   font-weight: 700;
   font-size: 15px;
   text-align: left;
@@ -85,37 +111,24 @@
 .plan-comparator-category-row .arrow-icon {
   width: 12px;
   height: 8px;
-  border-left: 2px solid #5E6A83;
-  border-bottom: 2px solid #5E6A83;
-  transform: rotate(135deg);
+  flex-shrink: 0;
   transition: transform 0.3s ease;
 }
 
 .plan-comparator-category-row.collapsed .arrow-icon {
-  transform: rotate(-45deg);
-}
-
-/* Filas plegables */
-.plan-comparator-row {
-  transition: all 0.3s ease;
+  transform: rotate(180deg);
 }
 
 .plan-comparator-row.is-hidden {
   display: none;
 }
 
-/* Destacado de columna (ej. columna activa / hover) */
-.plan-comparator-table td.highlight-cell {
-  background-color: #EEF2FD;
-}
-
-/* Iconos de Check y Cross */
 .icon-check {
   display: inline-block;
-  width: 12px;
-  height: 8px;
-  border-left: 2.5px solid #3D923D;
-  border-bottom: 2.5px solid #3D923D;
+  width: 10px;
+  height: 6px;
+  border-left: 2px solid #3D923D;
+  border-bottom: 2px solid #3D923D;
   transform: rotate(-45deg);
 }
 
@@ -125,10 +138,10 @@
   font-size: 16px;
 }
 
-/* Fila Inferior de Botones de Acción */
 .plan-comparator-footer-row td {
   border-bottom: none;
   padding-top: 32px;
+  background-color: #FFFFFF;
 }
 
 .btn-plan {
@@ -146,9 +159,8 @@
   transition: all 0.2s ease;
 }
 
-/* Variantes de Botones */
 .btn-plan-outline {
-  background: #ffffff;
+  background: #FFFFFF;
   color: #3E31FA;
   border: 2px solid #3E31FA;
 }
@@ -157,33 +169,92 @@
   background: #EEF2FD;
 }
 
+a.btn-plan.btn-plan-primary,
 .btn-plan-primary {
   background: linear-gradient(8deg, #3E31FA 15%, #8760F6 100%);
-  color: #FBFDFF;
+  color: #FBFDFF !important;
   border: none;
   font-size: 16px;
 }
 
 .btn-plan-primary:hover {
   opacity: 0.95;
-  box-shadow: 0px 4px 12px rgba(62, 49, 250, 0.25);
+  box-shadow: 0 4px 12px rgba(62, 49, 250, 0.25);
 }
 
 .btn-plan-ghost {
   background: transparent;
   color: #3E31FA;
   border: none;
+  text-decoration: underline;
 }
 
 .btn-plan-ghost:hover {
   background: #F4F6FB;
 }
 
-/* Responsive para Pantallas Pequeñas */
-@media (max-width: 768px) {
-  .plan-comparator-table {
-    display: block;
-    overflow-x: auto;
-    white-space: nowrap;
+/* Flecha flotante para el scroll horizontal en tablet/móvil */
+.plan-comparator-nav {
+  display: none;
+  position: absolute;
+  top: 50%;
+  right: 4px;
+  transform: translateY(-50%);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid #E1E5EA;
+  background: #FFFFFF;
+  box-shadow: 0 4px 16px rgba(15, 33, 69, 0.15);
+  color: #0F2145;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 2;
+  transition: opacity 0.2s ease;
+}
+
+.plan-comparator-nav svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* Estado oculto */
+.plan-comparator-wrapper.is-hidden {
+  display: none !important;
+}
+
+/* Estado visible con animación */
+.plan-comparator-wrapper.is-visible {
+  display: block !important;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (width <= 900px) {
+  .plan-comparator-container {
+    padding: 48px 24px;
+  }
+
+  .plan-comparator-title {
+    font-size: 32px;
+    line-height: 34.56px;
+  }
+
+  .plan-comparator-table .row-label-col {
+    width: 150px;
+  }
+
+  .plan-comparator-nav {
+    display: flex;
+  }
+
+  .btn-plan {
+    max-width: 140px;
+    font-size: 13px;
   }
 }

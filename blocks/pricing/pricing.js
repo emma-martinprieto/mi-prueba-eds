@@ -202,6 +202,9 @@ export default function decorate(block) {
     compareBtn.className = 'compare-plans';
     compareBtn.type = 'button';
     compareBtn.textContent = compareRow.textContent.trim();
+    compareBtn.addEventListener('click', () => {
+      document.dispatchEvent(new CustomEvent('toggle-plan-comparator', { detail: { action: 'open' } }));
+    });
     block.append(compareBtn);
   }
 
