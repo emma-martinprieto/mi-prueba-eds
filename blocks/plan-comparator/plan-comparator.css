@@ -1,0 +1,189 @@
+/* Estilos globales del bloque */
+.plan-comparator-container {
+  max-width: 1248px;
+  margin: 0 auto;
+  padding: 0 16px;
+  font-family: "RM Neue", -apple-system, BlinkMacSystemFont, sans-serif;
+  color: #0F2145;
+  background-color: #ffffff;
+}
+
+/* Encabezado Principal */
+.plan-comparator-header {
+  margin-bottom: 32px;
+}
+
+.plan-comparator-title {
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 40px;
+  color: #0F2145;
+  margin: 0 0 8px 0;
+}
+
+.plan-comparator-subtitle {
+  font-size: 16px;
+  font-weight: 400;
+  color: #5E6A83;
+  margin: 0;
+}
+
+/* Tabla Principal */
+.plan-comparator-table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+.plan-comparator-table th,
+.plan-comparator-table td {
+  padding: 16px;
+  text-align: center;
+  border-bottom: 1px solid #E1E5EA;
+  font-size: 14px;
+  line-height: 20px;
+  vertical-align: middle;
+}
+
+.plan-comparator-table td:first-child {
+  text-align: left;
+  font-weight: 400;
+  width: 30%;
+}
+
+.plan-comparator-table th {
+  font-weight: 700;
+  vertical-align: top;
+  padding-bottom: 24px;
+}
+
+.plan-comparator-table th small {
+  display: block;
+  font-weight: 400;
+  color: #788398;
+  font-size: 12px;
+  margin-top: 4px;
+}
+
+/* Fila de Acordeón / Categoría */
+.plan-comparator-category-row td {
+  background-color: #ffffff;
+  font-weight: 700;
+  font-size: 15px;
+  text-align: left;
+  cursor: pointer;
+  padding: 20px 16px;
+  user-select: none;
+}
+
+.plan-comparator-category-row .accordion-toggle {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.plan-comparator-category-row .arrow-icon {
+  width: 12px;
+  height: 8px;
+  border-left: 2px solid #5E6A83;
+  border-bottom: 2px solid #5E6A83;
+  transform: rotate(135deg);
+  transition: transform 0.3s ease;
+}
+
+.plan-comparator-category-row.collapsed .arrow-icon {
+  transform: rotate(-45deg);
+}
+
+/* Filas plegables */
+.plan-comparator-row {
+  transition: all 0.3s ease;
+}
+
+.plan-comparator-row.is-hidden {
+  display: none;
+}
+
+/* Destacado de columna (ej. columna activa / hover) */
+.plan-comparator-table td.highlight-cell {
+  background-color: #EEF2FD;
+}
+
+/* Iconos de Check y Cross */
+.icon-check {
+  display: inline-block;
+  width: 12px;
+  height: 8px;
+  border-left: 2.5px solid #3D923D;
+  border-bottom: 2.5px solid #3D923D;
+  transform: rotate(-45deg);
+}
+
+.icon-cross {
+  color: #8C95A6;
+  font-weight: 700;
+  font-size: 16px;
+}
+
+/* Fila Inferior de Botones de Acción */
+.plan-comparator-footer-row td {
+  border-bottom: none;
+  padding-top: 32px;
+}
+
+.btn-plan {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 174px;
+  height: 48px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none;
+  box-sizing: border-box;
+  transition: all 0.2s ease;
+}
+
+/* Variantes de Botones */
+.btn-plan-outline {
+  background: #ffffff;
+  color: #3E31FA;
+  border: 2px solid #3E31FA;
+}
+
+.btn-plan-outline:hover {
+  background: #EEF2FD;
+}
+
+.btn-plan-primary {
+  background: linear-gradient(8deg, #3E31FA 15%, #8760F6 100%);
+  color: #FBFDFF;
+  border: none;
+  font-size: 16px;
+}
+
+.btn-plan-primary:hover {
+  opacity: 0.95;
+  box-shadow: 0px 4px 12px rgba(62, 49, 250, 0.25);
+}
+
+.btn-plan-ghost {
+  background: transparent;
+  color: #3E31FA;
+  border: none;
+}
+
+.btn-plan-ghost:hover {
+  background: #F4F6FB;
+}
+
+/* Responsive para Pantallas Pequeñas */
+@media (max-width: 768px) {
+  .plan-comparator-table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+}
