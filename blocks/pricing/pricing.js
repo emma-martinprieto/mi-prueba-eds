@@ -21,7 +21,8 @@ export default function decorate(block) {
   eyebrow.className = 'pricing-eyebrow';
   eyebrow.textContent = eyebrowRow?.textContent.trim() || '';
   const h2 = document.createElement('h2');
-  h2.innerHTML = titleRow?.innerHTML || '';
+ const titleCell = titleRow?.children[0];
+  h2.innerHTML = titleCell?.querySelector('p')?.innerHTML || titleCell?.innerHTML || titleCell?.textContent.trim() || '';
   const desc = document.createElement('p');
   desc.textContent = descRow?.textContent.trim() || '';
   header.append(eyebrow, h2, desc);
