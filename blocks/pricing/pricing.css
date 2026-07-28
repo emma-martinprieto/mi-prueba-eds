@@ -249,8 +249,8 @@
   justify-content: center;
   gap: 4px;
   width: 100%;
-  margin-top: 16px;
-  margin-bottom: 8px;
+  margin-top: auto !important;
+  margin-bottom: 0 !important;
   padding: 4px 0;
   border: none;
   background: none;
@@ -272,7 +272,7 @@
 }
 
 .pricing .card-footer {
-  padding: 16px 24px 24px;
+  padding: 8px 24px 24px; 
   display: flex;
   flex-direction: column;
   align-items: center;
