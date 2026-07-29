@@ -340,12 +340,25 @@
     margin-right: 24px;
   }
 
-  .pricing .pricing-header h2 {
-    font-size: 36px;
-    line-height: 40px;
+  .pricing .pricing-header {
+    gap: 10px !important;
   }
 
-  /* Carrusel de una tarjeta a la vez, sincronizado con las pestañas */
+  .pricing .pricing-eyebrow {
+    font-size: 13px !important;
+    line-height: 18px !important;
+  }
+
+  .pricing .pricing-header h2 {
+    font-size: 28px !important;
+    line-height: 32px !important;
+  }
+
+  .pricing .pricing-header p:not(.pricing-eyebrow) {
+    font-size: 14px !important;
+    line-height: 20px !important;
+  }
+
   .pricing .pricing-cards-wrap {
     position: relative;
     width: 100%;
@@ -358,6 +371,8 @@
     scroll-snap-type: x mandatory;
     scrollbar-width: none;
     padding: 0 24px;
+    padding-top: 16px !important; /* Espacio superior para que el badge no se recorte con el overflow */
+  margin-top: 10px;
   }
 
   .pricing .pricing-cards::-webkit-scrollbar {
